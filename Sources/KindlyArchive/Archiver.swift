@@ -4,7 +4,7 @@ public class Archiver {
     public init() {}
     
     public func archive(directory dirStr: String, destination: String) throws {
-        let dir = Path(dirStr)
+        let dir = Path(URL(fileURLWithPath: dirStr).path)
         let baseDir = dir.parent
         let dirName = dir.name
         let paths = dir.subpaths.map { Path(dirName) + $0 }
