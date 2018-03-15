@@ -1,0 +1,643 @@
+{
+  "entries" : [
+    {
+      "path" : "Sources\/kiar",
+      "type" : "directory"
+    },
+    {
+      "path" : "Sources\/kiar\/main.swift",
+      "size" : 27,
+      "offset" : 24,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/kiar\/App.swift",
+      "size" : 1652,
+      "offset" : 80,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/KindlyArchive",
+      "type" : "directory"
+    },
+    {
+      "path" : "Sources\/KindlyArchive\/Extractor.swift",
+      "size" : 470,
+      "offset" : 1776,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/KindlyArchive\/ArchiveReader.swift",
+      "size" : 5160,
+      "offset" : 2294,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/KindlyArchive\/Path.swift",
+      "size" : 1985,
+      "offset" : 7493,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/KindlyArchive\/Header.swift",
+      "size" : 388,
+      "offset" : 9519,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/KindlyArchive\/ArchiveBuilder.swift",
+      "size" : 5578,
+      "offset" : 9956,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/KindlyArchive\/GenericError.swift",
+      "size" : 262,
+      "offset" : 15581,
+      "type" : "file"
+    },
+    {
+      "path" : "Sources\/KindlyArchive\/Archiver.swift",
+      "size" : 1046,
+      "offset" : 15886,
+      "type" : "file"
+    }
+  ]
+}
+----
+Sources/kiar/main.swift
+let app = App()
+app.main()
+
+----
+Sources/kiar/App.swift
+import Foundation
+import KindlyArchive
+
+public class App {
+    public func main() {
+        do {
+            if CommandLine.arguments.count < 2 {
+                throw GenericError(message: "no subcommand")
+            }
+            
+            let subcommand = CommandLine.arguments[1]
+            switch subcommand {
+            case "archive":
+                try archive()
+            case "extract":
+                try extract()
+            default:
+                throw GenericError(message: "unknown subcommand")
+            }
+        } catch let error {
+            print("\(error)")
+        }
+    }
+    
+    private func archive() throws {
+        if CommandLine.arguments.count < 3 {
+            throw GenericError(message: "file not specified")
+        }
+        
+        let source = CommandLine.arguments[2]
+        
+        let dest: String
+        if CommandLine.arguments.count < 4 {
+            dest = source + ".kiar"
+        } else {
+            dest = CommandLine.arguments[3]
+        }
+        
+        let archiver = Archiver()
+        try archiver.archive(directory: source, destination: dest)
+    }
+    
+    private func extract() throws {
+        if CommandLine.arguments.count < 3 {
+            throw GenericError(message: "archive not specified")
+        }
+        
+        let source = CommandLine.arguments[2]
+        let dest: String
+        if CommandLine.arguments.count < 4 {
+            dest = Path(source).parent.value
+        } else {
+            dest = CommandLine.arguments[3]
+        }
+        
+        let extractor = Extractor()
+        try extractor.extract(archivePath: source, destination: dest)
+    }
+}
+
+
+----
+Sources/KindlyArchive/Extractor.swift
+import Foundation
+
+public class Extractor {
+    public init() {}
+    
+    public func extract(archivePath: String, destination: String) throws {
+        let archivePath = Path(archivePath)
+        let destination = Path(destination)
+        
+        let reader = try ArchiveReader(path: archivePath)
+        let header = try reader.readHeader()
+        for entry in header.entries {
+            try reader.extractEntry(entry, destination: destination)
+        }
+    }
+}
+
+----
+Sources/KindlyArchive/ArchiveReader.swift
+import Foundation
+
+public class ArchiveReader {
+    
+    public init(path: Path) throws {
+        guard let handle = FileHandle(forReadingAtPath: path.value) else {
+            throw GenericError(message: "open read file handle failed: \(path)")
+        }
+        self.handle = handle
+        
+        self.filePosition = 0
+        self.bufferPosition = 0
+        
+        separator = "\n----\n"
+        separatorData = separator.data(using: .utf8)!
+    }
+    
+    deinit {
+        handle.closeFile()
+    }
+
+    public func readHeader() throws -> Header {
+        let separatorPosition = try findSeparator()
+        
+        handle.seek(toFileOffset: 0)
+        let headerData = handle.readData(ofLength: Int(separatorPosition))
+        let decoder = JSONDecoder()
+        let header = try decoder.decode(Header.self, from: headerData)
+        self.bodyPosition = separatorPosition + Int64(separatorData.count)
+        return header
+    }
+    
+    public func extractEntry(_ entry: Header.Entry, destination: Path) throws {
+        let path = destination + Path(entry.path)
+        switch entry.type {
+        case .directory:
+            if !path.exists {
+                try path.createDirectory()
+            }
+        case .file:
+            if !path.parent.exists {
+                try path.parent.createDirectory()
+            }
+            try path.createEmptyFile()
+            guard let writeHandle = FileHandle(forWritingAtPath: path.value) else {
+                throw GenericError(message: "open write file handle failed: \(path)")
+            }
+            try extractEntry(entry, writeHandle: writeHandle)
+            writeHandle.closeFile()
+        }
+    }
+    
+    private func extractEntry(_ entry: Header.Entry, writeHandle: FileHandle) throws {
+        handle.seek(toFileOffset: UInt64(bodyPosition! + entry.offset!))
+        var rem = entry.size!
+        while true {
+            if rem == 0 {
+                break
+            }
+            let chunkSize = min(rem, 8192)
+            let chunk = handle.readData(ofLength: Int(chunkSize))
+            if chunk.count == 0 {
+                throw GenericError(message: "read handle reached at end")
+            }
+            writeHandle.write(chunk)
+            rem -= chunkSize
+        }
+    }
+    
+    private func findSeparator() throws -> Int64 {
+        while true {
+            let position = self.position
+            
+            guard let char = readByte() else {
+                throw GenericError(message: "invalid file format")
+            }
+            
+            if char >= 0x80 {
+                try skipMultibyteCharacter(headChar: char)
+            } else if char == 0x0a {
+                seek(to: position)
+                if try checkSeparator() {
+                    return position
+                }
+                seek(to: position + 1)
+            }
+        }
+    }
+    
+    private func checkSeparator() throws -> Bool {
+        for expectedByte in separatorData {
+            guard let char = readByte() else {
+                throw GenericError(message: "invalid format")
+            }
+            if expectedByte != char {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    private func skipMultibyteCharacter(headChar h: UInt8) throws {
+        let len: Int
+        
+        if 0xC2 <= h && h <= 0xDF {
+            len = 2
+        } else if 0xE0 <= h && h <= 0xEF {
+            len = 3
+        } else if 0xF0 <= h && h <= 0xF7 {
+            len = 4
+        } else if 0xF8 <= h && h <= 0xFB {
+            len = 5
+        } else if 0xFC <= h && h <= 0xFD {
+            len = 6
+        } else {
+            throw GenericError(message: "invalid utf-8")
+        }
+        
+        for _ in 0..<(len - 1) {
+            guard let c = readByte() else {
+                throw GenericError(message: "invalid utf-8")
+            }
+            if 0x80 <= c && c <= 0xBF {
+                continue
+            }
+            throw GenericError(message: "invalid utf-8")
+        }
+    }
+    
+    private var position: Int64 {
+        return filePosition + Int64(bufferPosition)
+    }
+    
+    private func readByte() -> UInt8? {
+        if bufferPosition == buffer.count {
+            filePosition += Int64(bufferPosition)
+            bufferPosition = 0
+            buffer = handle.readData(ofLength: 2)
+            if buffer.count == 0 {
+                return nil
+            }
+        }
+        let byte = buffer[bufferPosition]
+        bufferPosition += 1
+        return byte
+    }
+
+    private func seek(to position: Int64) {
+        if filePosition <= position && position < filePosition + Int64(buffer.count) {
+            bufferPosition = Int(position - filePosition)
+            return
+        }
+        
+        filePosition = position
+        bufferPosition = 0
+        handle.seek(toFileOffset: UInt64(filePosition))
+        buffer = Data()
+    }
+
+    private let handle: FileHandle
+    private var filePosition: Int64
+    private var bufferPosition: Int
+    private var buffer: Data = Data()
+    
+    private var bodyPosition: Int64?
+    
+    private let separator: String
+    private let separatorData: Data
+    
+}
+
+----
+Sources/KindlyArchive/Path.swift
+import Foundation
+
+public struct Path : CustomStringConvertible {
+    public init(_ value: String) {
+        self.value = value
+    }
+    
+    public var value: String
+    
+    public var description: String {
+        return value
+    }
+    
+    public var exists: Bool {
+        return FileManager.default.fileExists(atPath: value)
+    }
+    
+    public var isDir: Bool {
+        var isDir = ObjCBool(false)
+        return FileManager.default.fileExists(atPath: value, isDirectory: &isDir) && isDir.boolValue
+    }
+    
+    public var name: String {
+        return nsPath.lastPathComponent
+    }
+    
+    public var parent: Path {
+        return Path(nsPath.deletingLastPathComponent)
+    }
+//    
+//    public var nameWithoutExtension: String {
+//        return (nsPath.lastPathComponent as NSString).deletingPathExtension
+//    }
+//    
+    public var subpaths: [Path] {
+        let paths = FileManager.default.subpaths(atPath: value) ?? []
+        return paths.map(Path.init)
+    }
+    
+    public func attributes() throws -> [FileAttributeKey: Any] {
+        return try FileManager.default.attributesOfItem(atPath: value)
+    }
+    
+    public var standardizing: Path {
+        return Path(nsPath.standardizingPath)
+    }
+    
+    public var components: [String] {
+        return nsPath.pathComponents
+    }
+    
+    public func delete() throws {
+        try FileManager.default.removeItem(atPath: value)
+    }
+    
+    public func createEmptyFile() throws {
+        if !FileManager.default.createFile(atPath: value, contents: nil) {
+            throw GenericError(message: "create file failed: \(self)")
+        }
+    }
+    
+    public func createDirectory() throws {
+        try FileManager.default.createDirectory(atPath: value, withIntermediateDirectories: true)
+    }
+    
+    public static func +(a: Path, b: Path) -> Path {
+        return Path(a.nsPath.appendingPathComponent(b.value))
+    }
+    
+    private var nsPath: NSString {
+        return value as NSString
+    }
+}
+
+----
+Sources/KindlyArchive/Header.swift
+import Foundation
+
+public struct Header : Codable {
+    public struct Entry : Codable {
+        public enum EntryType : String, Codable {
+            case directory
+            case file
+        }
+        
+        public var path: String
+        public var type: EntryType
+        public var size: Int64?
+        public var offset: Int64?
+    }
+    
+    public var entries: [Entry]    
+}
+
+----
+Sources/KindlyArchive/ArchiveBuilder.swift
+import Foundation
+
+public class ArchiveBuilder {
+    public let baseDir: Path
+    public let paths: [Path]
+    public let destination: Path
+    
+    public init(baseDir: Path, paths: [Path], destination: Path) {
+        self.baseDir = baseDir
+        self.paths = paths
+        self.destination = destination
+    }
+    
+    public func build() throws {
+        if !baseDir.isDir {
+            throw GenericError(message: "baseDir is not directory. baseDir=\(baseDir)")
+        }
+        
+        var entries: [Entry] = []
+        var index: Int = 0
+        for path in paths {
+            let checkPath = path.standardizing
+            guard let checkHead = checkPath.components.first else {
+                throw GenericError(message: "invalid path: \(path)")
+            }
+            if checkHead == ".." {
+                throw GenericError(message: "invalid path: \(path)")
+            }
+            
+            let realPath = baseDir + path
+            
+            if !realPath.exists {
+                throw GenericError(message: "path not exists: \(realPath)")
+            }
+            
+            let entry: Entry
+            
+            if realPath.isDir {
+                entry = .directory(index: index,
+                                   path: path,
+                                   realPath: realPath)
+            } else {
+                let attrs = try realPath.attributes()
+                guard let size = (attrs[FileAttributeKey.size] as? NSNumber)?.int64Value else {
+                    throw GenericError(message: "getting file size failed: \(realPath)")
+                }
+                entry = .file(index: index,
+                              path: path,
+                              realPath: realPath,
+                              size: size)
+            }
+            entries.append(entry)
+            index += 1
+        }
+        
+        let separator = "\n----\n"
+        let separatorData = separator.data(using: .utf8)!
+        
+        var offset: Int64 = 0
+        let fileEntries = entries.filter { $0.type == .file }
+        for entry in fileEntries {
+            var entry = entry
+            
+            let banner = entry.path.value + "\n"
+            let bannerData = banner.data(using: .utf8)!
+            entry.banner = bannerData
+            offset += Int64(bannerData.count)
+            
+            entry.offset = offset
+            offset += entry.size!
+            offset += Int64(separatorData.count)
+            
+            entries[entry.index] = entry
+        }
+        
+        let header = makeHeader(entries: entries)
+        
+        if destination.exists {
+            try destination.delete()
+        }
+        try destination.createEmptyFile()
+        guard let writeHandle = FileHandle(forWritingAtPath: destination.value) else {
+            throw GenericError(message: "open write file handle failed: \(destination)")
+        }
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let headerJSON: Data = try encoder.encode(header)
+        
+        writeHandle.write(headerJSON)
+        writeHandle.write(separatorData)
+        
+        for entry in entries {
+            if entry.type == .file {
+                try writeEntry(entry, writeHandle: writeHandle)
+                writeHandle.write(separatorData)
+            }
+        }
+        
+        writeHandle.closeFile()
+    }
+    
+    private struct Entry {
+        public var index: Int
+        public var path: Path
+        public var realPath: Path
+        public var type: Header.Entry.EntryType
+        public var size: Int64? = nil
+        public var offset: Int64? = nil
+        public var banner: Data? = nil
+        
+        public init(index: Int,
+                    path: Path,
+                    realPath: Path,
+                    type: Header.Entry.EntryType)
+        {
+            self.index = index
+            self.path = path
+            self.realPath = realPath
+            self.type = type
+        }
+        
+        public static func directory(index: Int,
+                                     path: Path,
+                                     realPath: Path) -> Entry
+        {
+            return Entry(index: index, path: path, realPath: realPath, type: .directory)
+        }
+        
+        public static func file(index: Int,
+                                path: Path,
+                                realPath: Path,
+                                size: Int64) -> Entry {
+            var entry = Entry(index: index, path: path, realPath: realPath, type: .file)
+            entry.size = size
+            return entry
+        }
+    }
+    
+    private func makeHeader(entries: [Entry]) -> Header {
+        let entries = entries.map { entry in
+            Header.Entry(path: entry.path.value,
+                         type: entry.type,
+                         size: entry.size,
+                         offset: entry.offset)
+        }
+        return Header(entries: entries)
+    }
+    
+    private func writeEntry(_ entry: Entry, writeHandle: FileHandle) throws {
+        writeHandle.write(entry.banner!)
+        
+        guard let readHandle = FileHandle(forReadingAtPath: entry.realPath.value) else {
+            throw GenericError(message: "open read file handle failed: \(entry.realPath)")
+        }
+        
+        while true {
+            let chunk = readHandle.readData(ofLength: 8192)
+            if chunk.count == 0 {
+                break
+            }
+            
+            writeHandle.write(chunk)
+        }
+        
+        readHandle.closeFile()
+    }
+    
+}
+
+----
+Sources/KindlyArchive/GenericError.swift
+import Foundation
+
+public struct GenericError : Error, CustomStringConvertible {
+    public var message: String
+    
+    public init(message: String) {
+        self.message = message
+    }
+    
+    public var description: String {
+        return message
+    }
+}
+
+----
+Sources/KindlyArchive/Archiver.swift
+import Foundation
+
+public class Archiver {
+    public init() {}
+    
+    public func archive(directory dirStr: String, destination: String) throws {
+        let dir = Path(URL(fileURLWithPath: dirStr).path)
+        let baseDir = dir.parent
+        let dirName = dir.name
+        let paths = dir.subpaths.map { Path(dirName) + $0 }
+        return try archive(baseDir: baseDir,
+                           paths: paths,
+                           destination: Path(destination))
+    }
+    
+    public func archive(baseDir: String, paths: [String], destination: String) throws {
+        return try archive(baseDir: Path(baseDir),
+                           paths: paths.map(Path.init),
+                           destination: Path(destination))
+    }
+    
+    public func archive(baseDir: Path, paths: [Path], destination: Path) throws {
+        let builder = ArchiveBuilder(baseDir: baseDir,
+                                     paths: paths,
+                                     destination: destination)
+        return try builder.build()
+    }
+}
+
+----
