@@ -20,8 +20,21 @@ public struct Path : CustomStringConvertible {
         return FileManager.default.fileExists(atPath: value, isDirectory: &isDir) && isDir.boolValue
     }
     
+    public var name: String {
+        return nsPath.lastPathComponent
+    }
+    
     public var parent: Path {
         return Path(nsPath.deletingLastPathComponent)
+    }
+//    
+//    public var nameWithoutExtension: String {
+//        return (nsPath.lastPathComponent as NSString).deletingPathExtension
+//    }
+//    
+    public var subpaths: [Path] {
+        let paths = FileManager.default.subpaths(atPath: value) ?? []
+        return paths.map(Path.init)
     }
     
     public func attributes() throws -> [FileAttributeKey: Any] {
@@ -40,10 +53,14 @@ public struct Path : CustomStringConvertible {
         try FileManager.default.removeItem(atPath: value)
     }
     
-    public func create() throws {
+    public func createEmptyFile() throws {
         if !FileManager.default.createFile(atPath: value, contents: nil) {
             throw GenericError(message: "create file failed: \(self)")
         }
+    }
+    
+    public func createDirectory() throws {
+        try FileManager.default.createDirectory(atPath: value, withIntermediateDirectories: true)
     }
     
     public static func +(a: Path, b: Path) -> Path {

@@ -5,10 +5,10 @@ public class ArchiveBuilder {
     public let paths: [Path]
     public let destination: Path
     
-    public init(baseDir: String, paths: [String], destination: String) {
-        self.baseDir = Path(baseDir)
-        self.paths = paths.map(Path.init)
-        self.destination = Path(destination)
+    public init(baseDir: Path, paths: [Path], destination: Path) {
+        self.baseDir = baseDir
+        self.paths = paths
+        self.destination = destination
     }
     
     public func build() throws {
@@ -78,7 +78,7 @@ public class ArchiveBuilder {
         if destination.exists {
             try destination.delete()
         }
-        try destination.create()
+        try destination.createEmptyFile()
         guard let writeHandle = FileHandle(forWritingAtPath: destination.value) else {
             throw GenericError(message: "open write file handle failed: \(destination)")
         }

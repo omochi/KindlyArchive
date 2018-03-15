@@ -4,16 +4,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "UsefulArchive",
+    name: "KindlyArchive",
     products: [
-        .library(name: "UsefulArchive", targets: ["UsefulArchive"]),
-        .executable(name: "uar", targets: ["uar"])
+        .library(name: "KindlyArchive", targets: ["KindlyArchive"]),
+        .executable(name: "kiar", targets: ["kiar"])
     ],
     dependencies: [
     ],
     targets: [
-        .target(name: "UsefulArchive", dependencies: []),
-        .target(name: "uar", dependencies: ["UsefulArchive"]),
-        .testTarget(name: "UsefulArchiveTests", dependencies: ["UsefulArchive"]),
+        .target(name: "KindlyArchive", dependencies: []),
+        .target(name: "kiar", dependencies: ["KindlyArchive"]),
+        .testTarget(name: "KindlyArchiveTests", dependencies: ["KindlyArchive"]),
     ]
 )
