@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D69F774E205B9FAA0011E7A1 /* KindlyArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F774C205B9FAA0011E7A1 /* KindlyArchive.h */; };
+		D6198520205BFEBA00320872 /* KindlyArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F774C205B9FAA0011E7A1 /* KindlyArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D69F775D205B9FE00011E7A1 /* ArchiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7754205B9FE00011E7A1 /* ArchiveBuilder.swift */; };
 		D69F775E205B9FE00011E7A1 /* Archiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7755205B9FE00011E7A1 /* Archiver.swift */; };
 		D69F775F205B9FE00011E7A1 /* ArchiveReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7756205B9FE00011E7A1 /* ArchiveReader.swift */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D69F773D205B995D0011E7A1 /* KindlyArchive_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KindlyArchive_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D69F773D205B995D0011E7A1 /* KindlyArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KindlyArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69F774B205B9FAA0011E7A1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69F774C205B9FAA0011E7A1 /* KindlyArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KindlyArchive.h; sourceTree = "<group>"; };
 		D69F7754205B9FE00011E7A1 /* ArchiveBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveBuilder.swift; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		D69F773E205B995D0011E7A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D69F773D205B995D0011E7A1 /* KindlyArchive_mac.framework */,
+				D69F773D205B995D0011E7A1 /* KindlyArchive.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,16 +97,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D69F774E205B9FAA0011E7A1 /* KindlyArchive.h in Headers */,
+				D6198520205BFEBA00320872 /* KindlyArchive.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D69F773C205B995D0011E7A1 /* KindlyArchive-mac */ = {
+		D69F773C205B995D0011E7A1 /* KindlyArchive_mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive-mac" */;
+			buildConfigurationList = D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive_mac" */;
 			buildPhases = (
 				D69F7738205B995D0011E7A1 /* Sources */,
 				D69F7739205B995D0011E7A1 /* Frameworks */,
@@ -117,9 +117,9 @@
 			);
 			dependencies = (
 			);
-			name = "KindlyArchive-mac";
+			name = KindlyArchive_mac;
 			productName = KindlyArchive;
-			productReference = D69F773D205B995D0011E7A1 /* KindlyArchive_mac.framework */;
+			productReference = D69F773D205B995D0011E7A1 /* KindlyArchive.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -149,7 +149,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D69F773C205B995D0011E7A1 /* KindlyArchive-mac */,
+				D69F773C205B995D0011E7A1 /* KindlyArchive_mac */,
 			);
 		};
 /* End PBXProject section */
@@ -309,7 +309,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
+				PRODUCT_NAME = KindlyArchive;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 			};
@@ -330,7 +331,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
+				PRODUCT_NAME = KindlyArchive;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 			};
@@ -348,7 +350,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive-mac" */ = {
+		D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive_mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D69F7746205B995D0011E7A1 /* Debug */,
