@@ -23,7 +23,7 @@ public class ArchiveBuilder {
             guard let checkHead = checkPath.components.first else {
                 throw GenericError(message: "invalid path: \(path)")
             }
-            if checkHead == ".." {
+            if checkHead == Path("..") {
                 throw GenericError(message: "invalid path: \(path)")
             }
             

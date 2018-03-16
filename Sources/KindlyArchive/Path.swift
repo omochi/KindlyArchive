@@ -23,8 +23,8 @@ public struct Path : CustomStringConvertible, Equatable {
         return FileManager.default.fileExists(atPath: value, isDirectory: &isDir) && isDir.boolValue
     }
     
-    public var name: String {
-        return nsPath.lastPathComponent
+    public var name: Path {
+        return Path(nsPath.lastPathComponent)
     }
     
     public var parent: Path {
@@ -35,10 +35,15 @@ public struct Path : CustomStringConvertible, Equatable {
         return nsPath.pathExtension
     }
     
-    public var nameWithoutExtension: String {
-        return (name as NSString).deletingPathExtension
+    public var nameWithoutExtension: Path {
+        return Path((name.value as NSString).deletingPathExtension)
     }
-
+    
+    public func children() throws -> [Path] {
+        let contents = try FileManager.default.contentsOfDirectory(atPath: value)
+        return contents.map(Path.init)
+    }
+    
     public var subpaths: [Path] {
         let paths = FileManager.default.subpaths(atPath: value) ?? []
         return paths.map(Path.init)
@@ -52,8 +57,8 @@ public struct Path : CustomStringConvertible, Equatable {
         return Path(nsPath.standardizingPath)
     }
     
-    public var components: [String] {
-        return nsPath.pathComponents
+    public var components: [Path] {
+        return nsPath.pathComponents.map(Path.init)
     }
     
     public func delete() throws {
@@ -98,7 +103,7 @@ public struct Path : CustomStringConvertible, Equatable {
     private var nsPath: NSString {
         return value as NSString
     }
-
+    
     private var value: String
-
+    
 }

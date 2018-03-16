@@ -7,7 +7,7 @@ public class Archiver {
         let dir = Path(URL(fileURLWithPath: dirStr).path)
         let baseDir = dir.parent
         let dirName = dir.name
-        let paths = dir.subpaths.map { Path(dirName) + $0 }
+        let paths = dir.subpaths.map { dirName + $0 }
         return try archive(baseDir: baseDir,
                            paths: paths,
                            destination: Path(destination))
