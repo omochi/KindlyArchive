@@ -6,7 +6,13 @@
 //  Copyright © 2018年 omochimetaru. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+#   import <Foundation/Foundation.h>
+#elif TARGET_OS_MAC
+#   import <Cocoa/Cocoa.h>
+#endif
 
 //! Project version number for KindlyArchive.
 FOUNDATION_EXPORT double KindlyArchiveVersionNumber;

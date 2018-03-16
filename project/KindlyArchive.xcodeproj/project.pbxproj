@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6198520205BFEBA00320872 /* KindlyArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = D69F774C205B9FAA0011E7A1 /* KindlyArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6198540205C1E2300320872 /* KindlyArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = D619853E205C1E2300320872 /* KindlyArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6198541205C1E3300320872 /* KindlyArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = D619853E205C1E2300320872 /* KindlyArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6198542205C1F6D00320872 /* ArchiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7754205B9FE00011E7A1 /* ArchiveBuilder.swift */; };
+		D6198543205C1F6D00320872 /* Archiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7755205B9FE00011E7A1 /* Archiver.swift */; };
+		D6198544205C1F6D00320872 /* ArchiveReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7756205B9FE00011E7A1 /* ArchiveReader.swift */; };
+		D6198545205C1F6D00320872 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7757205B9FE00011E7A1 /* Extractor.swift */; };
+		D6198546205C1F6D00320872 /* GenericError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7758205B9FE00011E7A1 /* GenericError.swift */; };
+		D6198547205C1F6D00320872 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7759205B9FE00011E7A1 /* Header.swift */; };
+		D6198548205C1F6D00320872 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F775A205B9FE00011E7A1 /* Path.swift */; };
 		D69F775D205B9FE00011E7A1 /* ArchiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7754205B9FE00011E7A1 /* ArchiveBuilder.swift */; };
 		D69F775E205B9FE00011E7A1 /* Archiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7755205B9FE00011E7A1 /* Archiver.swift */; };
 		D69F775F205B9FE00011E7A1 /* ArchiveReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F7756205B9FE00011E7A1 /* ArchiveReader.swift */; };
@@ -18,9 +26,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D6198533205C1D6E00320872 /* KindlyArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KindlyArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6198536205C1D6E00320872 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
+		D619853D205C1E2300320872 /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
+		D619853E205C1E2300320872 /* KindlyArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KindlyArchive.h; sourceTree = "<group>"; };
 		D69F773D205B995D0011E7A1 /* KindlyArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KindlyArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D69F774B205B9FAA0011E7A1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D69F774C205B9FAA0011E7A1 /* KindlyArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KindlyArchive.h; sourceTree = "<group>"; };
 		D69F7754205B9FE00011E7A1 /* ArchiveBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveBuilder.swift; sourceTree = "<group>"; };
 		D69F7755205B9FE00011E7A1 /* Archiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archiver.swift; sourceTree = "<group>"; };
 		D69F7756205B9FE00011E7A1 /* ArchiveReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveReader.swift; sourceTree = "<group>"; };
@@ -31,6 +41,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D619852F205C1D6E00320872 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D69F7739205B995D0011E7A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -41,11 +58,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D619853C205C1DFB00320872 /* FrameworkFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D619853D205C1E2300320872 /* Info-macOS.plist */,
+				D6198536205C1D6E00320872 /* Info-iOS.plist */,
+				D619853E205C1E2300320872 /* KindlyArchive.h */,
+			);
+			path = FrameworkFiles;
+			sourceTree = "<group>";
+		};
 		D69F7733205B995D0011E7A1 = {
 			isa = PBXGroup;
 			children = (
+				D619853C205C1DFB00320872 /* FrameworkFiles */,
 				D69F774F205B9FE00011E7A1 /* Sources */,
-				D69F774A205B9FAA0011E7A1 /* KindlyArchive-mac */,
 				D69F773E205B995D0011E7A1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,17 +81,9 @@
 			isa = PBXGroup;
 			children = (
 				D69F773D205B995D0011E7A1 /* KindlyArchive.framework */,
+				D6198533205C1D6E00320872 /* KindlyArchive.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D69F774A205B9FAA0011E7A1 /* KindlyArchive-mac */ = {
-			isa = PBXGroup;
-			children = (
-				D69F774B205B9FAA0011E7A1 /* Info.plist */,
-				D69F774C205B9FAA0011E7A1 /* KindlyArchive.h */,
-			);
-			path = "KindlyArchive-mac";
 			sourceTree = "<group>";
 		};
 		D69F774F205B9FE00011E7A1 /* Sources */ = {
@@ -93,20 +112,46 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		D6198530205C1D6E00320872 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6198541205C1E3300320872 /* KindlyArchive.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D69F773A205B995D0011E7A1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6198520205BFEBA00320872 /* KindlyArchive.h in Headers */,
+				D6198540205C1E2300320872 /* KindlyArchive.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D69F773C205B995D0011E7A1 /* KindlyArchive_mac */ = {
+		D6198532205C1D6E00320872 /* KindlyArchive-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive_mac" */;
+			buildConfigurationList = D6198538205C1D6E00320872 /* Build configuration list for PBXNativeTarget "KindlyArchive-iOS" */;
+			buildPhases = (
+				D619852E205C1D6E00320872 /* Sources */,
+				D619852F205C1D6E00320872 /* Frameworks */,
+				D6198530205C1D6E00320872 /* Headers */,
+				D6198531205C1D6E00320872 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KindlyArchive-iOS";
+			productName = "KindlyArchive-iOS";
+			productReference = D6198533205C1D6E00320872 /* KindlyArchive.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D69F773C205B995D0011E7A1 /* KindlyArchive-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive-macOS" */;
 			buildPhases = (
 				D69F7738205B995D0011E7A1 /* Sources */,
 				D69F7739205B995D0011E7A1 /* Frameworks */,
@@ -117,7 +162,7 @@
 			);
 			dependencies = (
 			);
-			name = KindlyArchive_mac;
+			name = "KindlyArchive-macOS";
 			productName = KindlyArchive;
 			productReference = D69F773D205B995D0011E7A1 /* KindlyArchive.framework */;
 			productType = "com.apple.product-type.framework";
@@ -131,6 +176,10 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = omochimetaru;
 				TargetAttributes = {
+					D6198532205C1D6E00320872 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					D69F773C205B995D0011E7A1 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -149,12 +198,20 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D69F773C205B995D0011E7A1 /* KindlyArchive_mac */,
+				D69F773C205B995D0011E7A1 /* KindlyArchive-macOS */,
+				D6198532205C1D6E00320872 /* KindlyArchive-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D6198531205C1D6E00320872 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D69F773B205B995D0011E7A1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,6 +222,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D619852E205C1D6E00320872 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6198542205C1F6D00320872 /* ArchiveBuilder.swift in Sources */,
+				D6198548205C1F6D00320872 /* Path.swift in Sources */,
+				D6198543205C1F6D00320872 /* Archiver.swift in Sources */,
+				D6198545205C1F6D00320872 /* Extractor.swift in Sources */,
+				D6198546205C1F6D00320872 /* GenericError.swift in Sources */,
+				D6198547205C1F6D00320872 /* Header.swift in Sources */,
+				D6198544205C1F6D00320872 /* ArchiveReader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D69F7738205B995D0011E7A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,6 +253,51 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D6198539205C1D6E00320872 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-iOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
+				PRODUCT_NAME = KindlyArchive;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D619853A205C1D6E00320872 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-iOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
+				PRODUCT_NAME = KindlyArchive;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		D69F7743205B995D0011E7A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -305,7 +421,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/KindlyArchive-mac/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-macOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
@@ -327,7 +443,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/KindlyArchive-mac/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-macOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
@@ -341,6 +457,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D6198538205C1D6E00320872 /* Build configuration list for PBXNativeTarget "KindlyArchive-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6198539205C1D6E00320872 /* Debug */,
+				D619853A205C1D6E00320872 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D69F7737205B995D0011E7A1 /* Build configuration list for PBXProject "KindlyArchive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -350,7 +475,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive_mac" */ = {
+		D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D69F7746205B995D0011E7A1 /* Debug */,
