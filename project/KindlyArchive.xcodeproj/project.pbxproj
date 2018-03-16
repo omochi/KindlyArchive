@@ -104,9 +104,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D69F773C205B995D0011E7A1 /* KindlyArchive-mac */ = {
+		D69F773C205B995D0011E7A1 /* KindlyArchive_mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive-mac" */;
+			buildConfigurationList = D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive_mac" */;
 			buildPhases = (
 				D69F7738205B995D0011E7A1 /* Sources */,
 				D69F7739205B995D0011E7A1 /* Frameworks */,
@@ -117,7 +117,7 @@
 			);
 			dependencies = (
 			);
-			name = "KindlyArchive-mac";
+			name = KindlyArchive_mac;
 			productName = KindlyArchive;
 			productReference = D69F773D205B995D0011E7A1 /* KindlyArchive_mac.framework */;
 			productType = "com.apple.product-type.framework";
@@ -149,7 +149,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D69F773C205B995D0011E7A1 /* KindlyArchive-mac */,
+				D69F773C205B995D0011E7A1 /* KindlyArchive_mac */,
 			);
 		};
 /* End PBXProject section */
@@ -348,7 +348,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive-mac" */ = {
+		D69F7745205B995D0011E7A1 /* Build configuration list for PBXNativeTarget "KindlyArchive_mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D69F7746205B995D0011E7A1 /* Debug */,
