@@ -3,7 +3,7 @@ import Foundation
 public class ArchiveReader {
     
     public init(path: Path) throws {
-        guard let handle = FileHandle(forReadingAtPath: path.value) else {
+        guard let handle = FileHandle(forReadingAtPath: path.asString()) else {
             throw GenericError(message: "open read file handle failed: \(path)")
         }
         self.handle = handle
@@ -42,7 +42,7 @@ public class ArchiveReader {
                 try path.parent.createDirectory()
             }
             try path.createEmptyFile()
-            guard let writeHandle = FileHandle(forWritingAtPath: path.value) else {
+            guard let writeHandle = FileHandle(forWritingAtPath: path.asString()) else {
                 throw GenericError(message: "open write file handle failed: \(path)")
             }
             try extractEntry(entry, writeHandle: writeHandle)

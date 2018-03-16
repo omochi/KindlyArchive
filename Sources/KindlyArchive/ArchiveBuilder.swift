@@ -61,7 +61,7 @@ public class ArchiveBuilder {
         for entry in fileEntries {
             var entry = entry
             
-            let banner = entry.path.value + "\n"
+            let banner = entry.path.asString() + "\n"
             let bannerData = banner.data(using: .utf8)!
             entry.banner = bannerData
             offset += Int64(bannerData.count)
@@ -79,7 +79,7 @@ public class ArchiveBuilder {
             try destination.delete()
         }
         try destination.createEmptyFile()
-        guard let writeHandle = FileHandle(forWritingAtPath: destination.value) else {
+        guard let writeHandle = FileHandle(forWritingAtPath: destination.asString()) else {
             throw GenericError(message: "open write file handle failed: \(destination)")
         }
         
@@ -139,7 +139,7 @@ public class ArchiveBuilder {
     
     private func makeHeader(entries: [Entry]) -> Header {
         let entries = entries.map { entry in
-            Header.Entry(path: entry.path.value,
+            Header.Entry(path: entry.path.asString(),
                          type: entry.type,
                          size: entry.size,
                          offset: entry.offset)
@@ -150,7 +150,7 @@ public class ArchiveBuilder {
     private func writeEntry(_ entry: Entry, writeHandle: FileHandle) throws {
         writeHandle.write(entry.banner!)
         
-        guard let readHandle = FileHandle(forReadingAtPath: entry.realPath.value) else {
+        guard let readHandle = FileHandle(forReadingAtPath: entry.realPath.asString()) else {
             throw GenericError(message: "open read file handle failed: \(entry.realPath)")
         }
         

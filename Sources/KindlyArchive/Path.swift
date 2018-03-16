@@ -1,11 +1,14 @@
 import Foundation
 
-public struct Path : CustomStringConvertible {
+public struct Path : CustomStringConvertible, Equatable {
     public init(_ value: String) {
         self.value = value
     }
     
-    public var value: String
+    public init(url: URL) {
+        precondition(url.isFileURL)
+        self.init(url.path)
+    }
     
     public var description: String {
         return value
@@ -27,11 +30,15 @@ public struct Path : CustomStringConvertible {
     public var parent: Path {
         return Path(nsPath.deletingLastPathComponent)
     }
-//    
-//    public var nameWithoutExtension: String {
-//        return (nsPath.lastPathComponent as NSString).deletingPathExtension
-//    }
-//    
+    
+    public var `extension`: String {
+        return nsPath.pathExtension
+    }
+    
+    public var nameWithoutExtension: String {
+        return (name as NSString).deletingPathExtension
+    }
+
     public var subpaths: [Path] {
         let paths = FileManager.default.subpaths(atPath: value) ?? []
         return paths.map(Path.init)
@@ -53,6 +60,15 @@ public struct Path : CustomStringConvertible {
         try FileManager.default.removeItem(atPath: value)
     }
     
+    
+    public func copy(to path: Path) throws {
+        try FileManager.default.copyItem(atPath: value, toPath: path.value)
+    }
+    
+    public func move(to path: Path) throws {
+        try FileManager.default.moveItem(atPath: value, toPath: path.value)
+    }
+    
     public func createEmptyFile() throws {
         if !FileManager.default.createFile(atPath: value, contents: nil) {
             throw GenericError(message: "create file failed: \(self)")
@@ -63,11 +79,26 @@ public struct Path : CustomStringConvertible {
         try FileManager.default.createDirectory(atPath: value, withIntermediateDirectories: true)
     }
     
+    public func asString() -> String {
+        return value
+    }
+    
+    public func asURL() -> URL {
+        return URL(fileURLWithPath: value)
+    }
+    
     public static func +(a: Path, b: Path) -> Path {
         return Path(a.nsPath.appendingPathComponent(b.value))
+    }
+    
+    public static func ==(a: Path, b: Path) -> Bool {
+        return a.nsPath == b.nsPath
     }
     
     private var nsPath: NSString {
         return value as NSString
     }
+
+    private var value: String
+
 }
