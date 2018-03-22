@@ -86,9 +86,7 @@ public class ArchiveBuilder {
         let header = makeHeader(entries: entries)
         
         try destination.write(data: Data())
-        guard let writeHandle = FileHandle(forWritingAtPath: destination.asString()) else {
-            throw KindlyArchiveError(message: "open write file handle failed: \(destination)")
-        }
+        let writeHandle = try destination.openWritingHandle()
         
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -103,8 +101,6 @@ public class ArchiveBuilder {
                 writeHandle.write(separatorData)
             }
         }
-        
-        writeHandle.closeFile()
     }
     
     private struct Entry {
@@ -157,9 +153,7 @@ public class ArchiveBuilder {
     private func writeEntry(_ entry: Entry, writeHandle: FileHandle) throws {
         writeHandle.write(entry.banner!)
         
-        guard let readHandle = FileHandle(forReadingAtPath: entry.realPath.asString()) else {
-            throw KindlyArchiveError(message: "open read file handle failed: \(entry.realPath)")
-        }
+        let readHandle = try entry.realPath.openReadingHandle()
         
         while true {
             let chunk = readHandle.readData(ofLength: 8192)
@@ -169,8 +163,6 @@ public class ArchiveBuilder {
             
             writeHandle.write(chunk)
         }
-        
-        readHandle.closeFile()
     }
     
 }

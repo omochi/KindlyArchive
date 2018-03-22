@@ -4,10 +4,7 @@ import FilePathFramework
 public class ArchiveReader {
     
     public init(path: FilePath) throws {
-        guard let handle = FileHandle(forReadingAtPath: path.asString()) else {
-            throw KindlyArchiveError(message: "open read file handle failed: \(path)")
-        }
-        self.handle = handle
+        self.handle = try path.openReadingHandle()
         
         self.filePosition = 0
         self.bufferPosition = 0
@@ -16,10 +13,6 @@ public class ArchiveReader {
         separatorData = separator.data(using: .utf8)!
     }
     
-    deinit {
-        handle.closeFile()
-    }
-
     public func readHeader() throws -> Header {
         let separatorPosition = try findSeparator()
         
@@ -38,11 +31,8 @@ public class ArchiveReader {
             try path.createDirectory(withIntermediates: true)
         case .file:
             try path.write(data: Data(), createDirectory: true)
-            guard let writeHandle = FileHandle(forWritingAtPath: path.asString()) else {
-                throw KindlyArchiveError(message: "open write file handle failed: \(path)")
-            }
+            let writeHandle = try path.openWritingHandle()
             try extractEntry(entry, writeHandle: writeHandle)
-            writeHandle.closeFile()
         }
     }
     

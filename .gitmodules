@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/FilePath"]
+	path = Carthage/Checkouts/FilePath
+	url = https://github.com/omochi/FilePath.git
