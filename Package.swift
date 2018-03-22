@@ -9,7 +9,7 @@ let package = Package(
         .executable(name: "kiar", targets: ["kiar"])
     ],
     dependencies: [
-        .package(url: "https://github.com/omochi/FilePath.git", from: "1.0.3"),
+        .package(url: "https://github.com/omochi/FilePath.git", from: "1.0.4"),
     ],
     targets: [
         .target(name: "KindlyArchive", dependencies: ["FilePathFramework"]),
