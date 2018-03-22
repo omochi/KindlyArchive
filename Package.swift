@@ -1,5 +1,4 @@
 // swift-tools-version:4.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -10,9 +9,10 @@ let package = Package(
         .executable(name: "kiar", targets: ["kiar"])
     ],
     dependencies: [
+        .package(url: "https://github.com/omochi/FilePath.git", from: "1.0.1"),
     ],
     targets: [
-        .target(name: "KindlyArchive", dependencies: []),
+        .target(name: "KindlyArchive", dependencies: ["FilePathFramework"]),
         .target(name: "kiar", dependencies: ["KindlyArchive"]),
         .testTarget(name: "KindlyArchiveTests", dependencies: ["KindlyArchive"]),
     ]

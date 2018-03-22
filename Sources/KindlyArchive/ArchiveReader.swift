@@ -1,10 +1,11 @@
 import Foundation
+import FilePathFramework
 
 public class ArchiveReader {
     
-    public init(path: Path) throws {
+    public init(path: FilePath) throws {
         guard let handle = FileHandle(forReadingAtPath: path.asString()) else {
-            throw GenericError(message: "open read file handle failed: \(path)")
+            throw KindlyArchiveError(message: "open read file handle failed: \(path)")
         }
         self.handle = handle
         
@@ -30,20 +31,15 @@ public class ArchiveReader {
         return header
     }
     
-    public func extractEntry(_ entry: Header.Entry, destination: Path) throws {
-        let path = destination + Path(entry.path)
+    public func extractEntry(_ entry: Header.Entry, destination: FilePath) throws {
+        let path = destination + FilePath(entry.path)
         switch entry.type {
         case .directory:
-            if !path.exists {
-                try path.createDirectory()
-            }
+            try path.createDirectory(withIntermediates: true)
         case .file:
-            if !path.parent.exists {
-                try path.parent.createDirectory()
-            }
-            try path.createEmptyFile()
+            try path.write(data: Data(), createDirectory: true)
             guard let writeHandle = FileHandle(forWritingAtPath: path.asString()) else {
-                throw GenericError(message: "open write file handle failed: \(path)")
+                throw KindlyArchiveError(message: "open write file handle failed: \(path)")
             }
             try extractEntry(entry, writeHandle: writeHandle)
             writeHandle.closeFile()
@@ -60,7 +56,7 @@ public class ArchiveReader {
             let chunkSize = min(rem, 8192)
             let chunk = handle.readData(ofLength: Int(chunkSize))
             if chunk.count == 0 {
-                throw GenericError(message: "read handle reached at end")
+                throw KindlyArchiveError(message: "read handle reached at end")
             }
             writeHandle.write(chunk)
             rem -= chunkSize
@@ -72,7 +68,7 @@ public class ArchiveReader {
             let position = self.position
             
             guard let char = readByte() else {
-                throw GenericError(message: "invalid file format")
+                throw KindlyArchiveError(message: "invalid file format")
             }
             
             if char >= 0x80 {
@@ -90,7 +86,7 @@ public class ArchiveReader {
     private func checkSeparator() throws -> Bool {
         for expectedByte in separatorData {
             guard let char = readByte() else {
-                throw GenericError(message: "invalid format")
+                throw KindlyArchiveError(message: "invalid format")
             }
             if expectedByte != char {
                 return false
@@ -114,17 +110,17 @@ public class ArchiveReader {
         } else if 0xFC <= h && h <= 0xFD {
             len = 6
         } else {
-            throw GenericError(message: "invalid utf-8")
+            throw KindlyArchiveError(message: "invalid utf-8")
         }
         
         for _ in 0..<(len - 1) {
             guard let c = readByte() else {
-                throw GenericError(message: "invalid utf-8")
+                throw KindlyArchiveError(message: "invalid utf-8")
             }
             if 0x80 <= c && c <= 0xBF {
                 continue
             }
-            throw GenericError(message: "invalid utf-8")
+            throw KindlyArchiveError(message: "invalid utf-8")
         }
     }
     

@@ -2,7 +2,7 @@
 
 Archive command line tool and library written in Swift.
 It has human readable archive format.
-See example. [example/Sources.kiar](example/Sources.kiar)
+See example. [Examples/Sources.kiar](Examples/Sources.kiar)
 
 # Usage
 

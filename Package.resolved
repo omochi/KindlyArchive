@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FilePath",
+        "repositoryURL": "https://github.com/omochi/FilePath.git",
+        "state": {
+          "branch": null,
+          "revision": "64ca6f8d16b670e086e7018bfd8d3a4655f67404",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

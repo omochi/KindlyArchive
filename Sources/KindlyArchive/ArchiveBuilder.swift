@@ -1,48 +1,58 @@
 import Foundation
+import FilePathFramework
 
 public class ArchiveBuilder {
-    public let baseDir: Path
-    public let paths: [Path]
-    public let destination: Path
+    public let baseDir: FilePath
+    public let paths: [FilePath]
+    public let destination: FilePath
     
-    public init(baseDir: Path, paths: [Path], destination: Path) {
+    public init(baseDir: FilePath, paths: [FilePath], destination: FilePath) {
         self.baseDir = baseDir
         self.paths = paths
         self.destination = destination
     }
     
     public func build() throws {
-        if !baseDir.isDir {
-            throw GenericError(message: "baseDir is not directory. baseDir=\(baseDir)")
+        if destination.exists {
+            throw KindlyArchiveError(message: "destination is already exists: path=\(destination)")
+        }
+        
+        if !baseDir.isDirectory {
+            throw KindlyArchiveError(message: "baseDir is not directory. baseDir=\(baseDir)")
         }
         
         var entries: [Entry] = []
         var index: Int = 0
         for path in paths {
-            let checkPath = path.standardizing
+            let checkPath = path.normalized()
             guard let checkHead = checkPath.components.first else {
-                throw GenericError(message: "invalid path: \(path)")
+                throw KindlyArchiveError(message: "invalid path: \(path)")
             }
-            if checkHead == Path("..") {
-                throw GenericError(message: "invalid path: \(path)")
+            if checkHead == FilePath("..") {
+                throw KindlyArchiveError(message: "invalid path: \(path)")
             }
             
             let realPath = baseDir + path
             
+            if realPath.isSymbolicLink {
+                // TODO: symlink archive feature
+                continue
+            }
+            
             if !realPath.exists {
-                throw GenericError(message: "path not exists: \(realPath)")
+                throw KindlyArchiveError(message: "path not exists: \(realPath)")
             }
             
             let entry: Entry
             
-            if realPath.isDir {
+            if realPath.isDirectory {
                 entry = .directory(index: index,
                                    path: path,
                                    realPath: realPath)
             } else {
                 let attrs = try realPath.attributes()
                 guard let size = (attrs[FileAttributeKey.size] as? NSNumber)?.int64Value else {
-                    throw GenericError(message: "getting file size failed: \(realPath)")
+                    throw KindlyArchiveError(message: "getting file size failed: \(realPath)")
                 }
                 entry = .file(index: index,
                               path: path,
@@ -75,12 +85,9 @@ public class ArchiveBuilder {
         
         let header = makeHeader(entries: entries)
         
-        if destination.exists {
-            try destination.delete()
-        }
-        try destination.createEmptyFile()
+        try destination.write(data: Data())
         guard let writeHandle = FileHandle(forWritingAtPath: destination.asString()) else {
-            throw GenericError(message: "open write file handle failed: \(destination)")
+            throw KindlyArchiveError(message: "open write file handle failed: \(destination)")
         }
         
         let encoder = JSONEncoder()
@@ -102,16 +109,16 @@ public class ArchiveBuilder {
     
     private struct Entry {
         public var index: Int
-        public var path: Path
-        public var realPath: Path
+        public var path: FilePath
+        public var realPath: FilePath
         public var type: Header.Entry.EntryType
         public var size: Int64? = nil
         public var offset: Int64? = nil
         public var banner: Data? = nil
         
         public init(index: Int,
-                    path: Path,
-                    realPath: Path,
+                    path: FilePath,
+                    realPath: FilePath,
                     type: Header.Entry.EntryType)
         {
             self.index = index
@@ -121,15 +128,15 @@ public class ArchiveBuilder {
         }
         
         public static func directory(index: Int,
-                                     path: Path,
-                                     realPath: Path) -> Entry
+                                     path: FilePath,
+                                     realPath: FilePath) -> Entry
         {
             return Entry(index: index, path: path, realPath: realPath, type: .directory)
         }
         
         public static func file(index: Int,
-                                path: Path,
-                                realPath: Path,
+                                path: FilePath,
+                                realPath: FilePath,
                                 size: Int64) -> Entry {
             var entry = Entry(index: index, path: path, realPath: realPath, type: .file)
             entry.size = size
@@ -151,7 +158,7 @@ public class ArchiveBuilder {
         writeHandle.write(entry.banner!)
         
         guard let readHandle = FileHandle(forReadingAtPath: entry.realPath.asString()) else {
-            throw GenericError(message: "open read file handle failed: \(entry.realPath)")
+            throw KindlyArchiveError(message: "open read file handle failed: \(entry.realPath)")
         }
         
         while true {

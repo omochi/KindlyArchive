@@ -1,11 +1,12 @@
 import Foundation
+import FilePathFramework
 
 public class Extractor {
     public init() {}
     
     public func extract(archivePath: String, destination: String) throws {
-        let archivePath = Path(archivePath)
-        let destination = Path(destination)
+        let archivePath = FilePath(archivePath)
+        let destination = FilePath(destination)
         
         let reader = try ArchiveReader(path: archivePath)
         let header = try reader.readHeader()

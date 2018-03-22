@@ -1,0 +1,647 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D6ACB22A20637EE7001E6C56 /* ArchiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22220637EE7001E6C56 /* ArchiveBuilder.swift */; };
+		D6ACB22B20637EE7001E6C56 /* Archiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22320637EE7001E6C56 /* Archiver.swift */; };
+		D6ACB22C20637EE7001E6C56 /* ArchiveReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22420637EE7001E6C56 /* ArchiveReader.swift */; };
+		D6ACB22D20637EE7001E6C56 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22520637EE7001E6C56 /* Extractor.swift */; };
+		D6ACB22E20637EE7001E6C56 /* KindlyArchiveError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22620637EE7001E6C56 /* KindlyArchiveError.swift */; };
+		D6ACB22F20637EE7001E6C56 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22720637EE7001E6C56 /* Header.swift */; };
+		D6ACB23720638093001E6C56 /* KindlyArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = D6ACB23520638093001E6C56 /* KindlyArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6ACB28F20638229001E6C56 /* FilePathFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6ACB28E20638229001E6C56 /* FilePathFramework.framework */; };
+		D6ACB29D20638274001E6C56 /* ArchiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22220637EE7001E6C56 /* ArchiveBuilder.swift */; };
+		D6ACB29E20638274001E6C56 /* Archiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22320637EE7001E6C56 /* Archiver.swift */; };
+		D6ACB29F20638274001E6C56 /* ArchiveReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22420637EE7001E6C56 /* ArchiveReader.swift */; };
+		D6ACB2A020638274001E6C56 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22520637EE7001E6C56 /* Extractor.swift */; };
+		D6ACB2A120638274001E6C56 /* KindlyArchiveError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22620637EE7001E6C56 /* KindlyArchiveError.swift */; };
+		D6ACB2A220638274001E6C56 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22720637EE7001E6C56 /* Header.swift */; };
+		D6ACB2A5206382E1001E6C56 /* KindlyArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = D6ACB23520638093001E6C56 /* KindlyArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6ACB2B1206384F5001E6C56 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB21F20637EE7001E6C56 /* App.swift */; };
+		D6ACB2B2206384F5001E6C56 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ACB22020637EE7001E6C56 /* main.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D6ACB2A8206384F0001E6C56 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D6ACB21220637EB3001E6C56 /* KindlyArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KindlyArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6ACB21F20637EE7001E6C56 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		D6ACB22020637EE7001E6C56 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D6ACB22220637EE7001E6C56 /* ArchiveBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveBuilder.swift; sourceTree = "<group>"; };
+		D6ACB22320637EE7001E6C56 /* Archiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archiver.swift; sourceTree = "<group>"; };
+		D6ACB22420637EE7001E6C56 /* ArchiveReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveReader.swift; sourceTree = "<group>"; };
+		D6ACB22520637EE7001E6C56 /* Extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
+		D6ACB22620637EE7001E6C56 /* KindlyArchiveError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KindlyArchiveError.swift; sourceTree = "<group>"; };
+		D6ACB22720637EE7001E6C56 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		D6ACB23420638093001E6C56 /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
+		D6ACB23520638093001E6C56 /* KindlyArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KindlyArchive.h; sourceTree = "<group>"; };
+		D6ACB28E20638229001E6C56 /* FilePathFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FilePathFramework.framework; sourceTree = "<group>"; };
+		D6ACB29520638245001E6C56 /* KindlyArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KindlyArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6ACB2A3206382B8001E6C56 /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
+		D6ACB2AA206384F0001E6C56 /* kiar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = kiar; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6ACB2B32063854F001E6C56 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D6ACB20E20637EB3001E6C56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6ACB28F20638229001E6C56 /* FilePathFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6ACB29120638245001E6C56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6ACB2A7206384F0001E6C56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D6ACB20820637EB3001E6C56 = {
+			isa = PBXGroup;
+			children = (
+				D6ACB2B32063854F001E6C56 /* Package.swift */,
+				D6ACB23A206381F6001E6C56 /* Carthage */,
+				D6ACB23320638093001E6C56 /* FrameworkFiles */,
+				D6ACB21D20637EE7001E6C56 /* Sources */,
+				D6ACB21320637EB3001E6C56 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D6ACB21320637EB3001E6C56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB21220637EB3001E6C56 /* KindlyArchive.framework */,
+				D6ACB29520638245001E6C56 /* KindlyArchive.framework */,
+				D6ACB2AA206384F0001E6C56 /* kiar */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D6ACB21D20637EE7001E6C56 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB21E20637EE7001E6C56 /* kiar */,
+				D6ACB22120637EE7001E6C56 /* KindlyArchive */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		D6ACB21E20637EE7001E6C56 /* kiar */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB21F20637EE7001E6C56 /* App.swift */,
+				D6ACB22020637EE7001E6C56 /* main.swift */,
+			);
+			path = kiar;
+			sourceTree = "<group>";
+		};
+		D6ACB22120637EE7001E6C56 /* KindlyArchive */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB22620637EE7001E6C56 /* KindlyArchiveError.swift */,
+				D6ACB22220637EE7001E6C56 /* ArchiveBuilder.swift */,
+				D6ACB22320637EE7001E6C56 /* Archiver.swift */,
+				D6ACB22420637EE7001E6C56 /* ArchiveReader.swift */,
+				D6ACB22520637EE7001E6C56 /* Extractor.swift */,
+				D6ACB22720637EE7001E6C56 /* Header.swift */,
+			);
+			path = KindlyArchive;
+			sourceTree = "<group>";
+		};
+		D6ACB23320638093001E6C56 /* FrameworkFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB23420638093001E6C56 /* Info-iOS.plist */,
+				D6ACB2A3206382B8001E6C56 /* Info-macOS.plist */,
+				D6ACB23520638093001E6C56 /* KindlyArchive.h */,
+			);
+			path = FrameworkFiles;
+			sourceTree = "<group>";
+		};
+		D6ACB23A206381F6001E6C56 /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB23B206381F6001E6C56 /* Build */,
+			);
+			path = Carthage;
+			sourceTree = "<group>";
+		};
+		D6ACB23B206381F6001E6C56 /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB23D206381F6001E6C56 /* iOS */,
+				D6ACB246206381F6001E6C56 /* Mac */,
+				D6ACB24B206381F6001E6C56 /* tvOS */,
+				D6ACB24F206381F6001E6C56 /* watchOS */,
+			);
+			path = Build;
+			sourceTree = "<group>";
+		};
+		D6ACB23D206381F6001E6C56 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D6ACB28E20638229001E6C56 /* FilePathFramework.framework */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		D6ACB246206381F6001E6C56 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		D6ACB24B206381F6001E6C56 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		D6ACB24F206381F6001E6C56 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = watchOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D6ACB20F20637EB3001E6C56 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6ACB23720638093001E6C56 /* KindlyArchive.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6ACB29220638245001E6C56 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6ACB2A5206382E1001E6C56 /* KindlyArchive.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D6ACB21120637EB3001E6C56 /* KindlyArchive-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6ACB21A20637EB3001E6C56 /* Build configuration list for PBXNativeTarget "KindlyArchive-iOS" */;
+			buildPhases = (
+				D6ACB20D20637EB3001E6C56 /* Sources */,
+				D6ACB20E20637EB3001E6C56 /* Frameworks */,
+				D6ACB20F20637EB3001E6C56 /* Headers */,
+				D6ACB21020637EB3001E6C56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KindlyArchive-iOS";
+			productName = KindlyArchive;
+			productReference = D6ACB21220637EB3001E6C56 /* KindlyArchive.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D6ACB29420638245001E6C56 /* KindlyArchive-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6ACB29A20638245001E6C56 /* Build configuration list for PBXNativeTarget "KindlyArchive-macOS" */;
+			buildPhases = (
+				D6ACB29020638245001E6C56 /* Sources */,
+				D6ACB29120638245001E6C56 /* Frameworks */,
+				D6ACB29220638245001E6C56 /* Headers */,
+				D6ACB29320638245001E6C56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KindlyArchive-macOS";
+			productName = KindlyArchive;
+			productReference = D6ACB29520638245001E6C56 /* KindlyArchive.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D6ACB2A9206384F0001E6C56 /* kiar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6ACB2AE206384F0001E6C56 /* Build configuration list for PBXNativeTarget "kiar" */;
+			buildPhases = (
+				D6ACB2A6206384F0001E6C56 /* Sources */,
+				D6ACB2A7206384F0001E6C56 /* Frameworks */,
+				D6ACB2A8206384F0001E6C56 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kiar;
+			productName = kiar;
+			productReference = D6ACB2AA206384F0001E6C56 /* kiar */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D6ACB20920637EB3001E6C56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = omochimetaru;
+				TargetAttributes = {
+					D6ACB21120637EB3001E6C56 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					D6ACB29420638245001E6C56 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					D6ACB2A9206384F0001E6C56 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D6ACB20C20637EB3001E6C56 /* Build configuration list for PBXProject "KindlyArchive" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D6ACB20820637EB3001E6C56;
+			productRefGroup = D6ACB21320637EB3001E6C56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D6ACB21120637EB3001E6C56 /* KindlyArchive-iOS */,
+				D6ACB29420638245001E6C56 /* KindlyArchive-macOS */,
+				D6ACB2A9206384F0001E6C56 /* kiar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D6ACB21020637EB3001E6C56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6ACB29320638245001E6C56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D6ACB20D20637EB3001E6C56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6ACB22F20637EE7001E6C56 /* Header.swift in Sources */,
+				D6ACB22D20637EE7001E6C56 /* Extractor.swift in Sources */,
+				D6ACB22A20637EE7001E6C56 /* ArchiveBuilder.swift in Sources */,
+				D6ACB22B20637EE7001E6C56 /* Archiver.swift in Sources */,
+				D6ACB22C20637EE7001E6C56 /* ArchiveReader.swift in Sources */,
+				D6ACB22E20637EE7001E6C56 /* KindlyArchiveError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6ACB29020638245001E6C56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6ACB29D20638274001E6C56 /* ArchiveBuilder.swift in Sources */,
+				D6ACB29E20638274001E6C56 /* Archiver.swift in Sources */,
+				D6ACB2A020638274001E6C56 /* Extractor.swift in Sources */,
+				D6ACB2A120638274001E6C56 /* KindlyArchiveError.swift in Sources */,
+				D6ACB2A220638274001E6C56 /* Header.swift in Sources */,
+				D6ACB29F20638274001E6C56 /* ArchiveReader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6ACB2A6206384F0001E6C56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6ACB2B1206384F5001E6C56 /* App.swift in Sources */,
+				D6ACB2B2206384F5001E6C56 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D6ACB21820637EB3001E6C56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D6ACB21920637EB3001E6C56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D6ACB21B20637EB3001E6C56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-iOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
+				PRODUCT_NAME = KindlyArchive;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D6ACB21C20637EB3001E6C56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-iOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
+				PRODUCT_NAME = KindlyArchive;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D6ACB29B20638245001E6C56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-macOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
+				PRODUCT_NAME = KindlyArchive;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		D6ACB29C20638245001E6C56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/FrameworkFiles/Info-macOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
+				PRODUCT_NAME = KindlyArchive;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		D6ACB2AF206384F0001E6C56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		D6ACB2B0206384F0001E6C56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D6ACB20C20637EB3001E6C56 /* Build configuration list for PBXProject "KindlyArchive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6ACB21820637EB3001E6C56 /* Debug */,
+				D6ACB21920637EB3001E6C56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6ACB21A20637EB3001E6C56 /* Build configuration list for PBXNativeTarget "KindlyArchive-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6ACB21B20637EB3001E6C56 /* Debug */,
+				D6ACB21C20637EB3001E6C56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6ACB29A20638245001E6C56 /* Build configuration list for PBXNativeTarget "KindlyArchive-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6ACB29B20638245001E6C56 /* Debug */,
+				D6ACB29C20638245001E6C56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6ACB2AE206384F0001E6C56 /* Build configuration list for PBXNativeTarget "kiar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6ACB2AF206384F0001E6C56 /* Debug */,
+				D6ACB2B0206384F0001E6C56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D6ACB20920637EB3001E6C56 /* Project object */;
+}

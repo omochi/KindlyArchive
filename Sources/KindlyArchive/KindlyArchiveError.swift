@@ -1,6 +1,6 @@
 import Foundation
 
-public struct GenericError : Error, CustomStringConvertible {
+public struct KindlyArchiveError : Error, CustomStringConvertible {
     public var message: String
     
     public init(message: String) {

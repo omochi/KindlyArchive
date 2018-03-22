@@ -1,25 +1,26 @@
 import Foundation
+import FilePathFramework
 
 public class Archiver {
     public init() {}
     
     public func archive(directory dirStr: String, destination: String) throws {
-        let dir = Path(URL(fileURLWithPath: dirStr).path)
+        let dir = FilePath(dirStr).absolute()
         let baseDir = dir.parent
-        let dirName = dir.name
-        let paths = dir.subpaths.map { dirName + $0 }
+        let dirName = dir.lastComponent
+        let paths = try dir.subpaths().map { dirName + $0 }
         return try archive(baseDir: baseDir,
                            paths: paths,
-                           destination: Path(destination))
+                           destination: FilePath(destination))
     }
     
     public func archive(baseDir: String, paths: [String], destination: String) throws {
-        return try archive(baseDir: Path(baseDir),
-                           paths: paths.map(Path.init),
-                           destination: Path(destination))
+        return try archive(baseDir: FilePath(baseDir),
+                           paths: paths.map { FilePath($0) },
+                           destination: FilePath(destination))
     }
     
-    public func archive(baseDir: Path, paths: [Path], destination: Path) throws {
+    public func archive(baseDir: FilePath, paths: [FilePath], destination: FilePath) throws {
         let builder = ArchiveBuilder(baseDir: baseDir,
                                      paths: paths,
                                      destination: destination)

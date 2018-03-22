@@ -1,11 +1,12 @@
 import Foundation
+import FilePathFramework
 import KindlyArchive
 
 public class App {
     public func main() {
         do {
             if CommandLine.arguments.count < 2 {
-                throw GenericError(message: "no subcommand")
+                throw KindlyArchiveError(message: "no subcommand")
             }
             
             let subcommand = CommandLine.arguments[1]
@@ -15,7 +16,7 @@ public class App {
             case "extract":
                 try extract()
             default:
-                throw GenericError(message: "unknown subcommand")
+                throw KindlyArchiveError(message: "unknown subcommand")
             }
         } catch let error {
             print("\(error)")
@@ -24,16 +25,17 @@ public class App {
     
     private func archive() throws {
         if CommandLine.arguments.count < 3 {
-            throw GenericError(message: "file not specified")
+            throw KindlyArchiveError(message: "file not specified")
         }
         
         let source = CommandLine.arguments[2]
         
         let dest: String
-        if CommandLine.arguments.count < 4 {
-            dest = source + ".kiar"
-        } else {
+        if CommandLine.arguments.count > 3 {
             dest = CommandLine.arguments[3]
+        } else {
+            let absSource = FilePath(source).absolute()
+            dest = absSource.asString() + ".kiar"
         }
         
         let archiver = Archiver()
@@ -42,15 +44,15 @@ public class App {
     
     private func extract() throws {
         if CommandLine.arguments.count < 3 {
-            throw GenericError(message: "archive not specified")
+            throw KindlyArchiveError(message: "archive not specified")
         }
         
         let source = CommandLine.arguments[2]
         let dest: String
-        if CommandLine.arguments.count < 4 {
-            dest = Path(source).parent.value
-        } else {
+        if CommandLine.arguments.count > 3 {
             dest = CommandLine.arguments[3]
+        } else {
+            dest = FilePath(source).parent.asString()
         }
         
         let extractor = Extractor()
