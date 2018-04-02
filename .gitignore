@@ -2,4 +2,5 @@
 /.build
 /Packages
 xcuserdata
-Carthage
+/Carthage/Checkouts
+
