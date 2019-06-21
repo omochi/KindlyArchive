@@ -296,7 +296,7 @@
 				TargetAttributes = {
 					D6ACB21120637EB3001E6C56 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					D6ACB29420638245001E6C56 = {
@@ -315,6 +315,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D6ACB20820637EB3001E6C56;
 			productRefGroup = D6ACB21320637EB3001E6C56 /* Products */;
@@ -525,7 +526,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
 				PRODUCT_NAME = KindlyArchive;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -552,7 +553,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.omochimetaru.KindlyArchive;
 				PRODUCT_NAME = KindlyArchive;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
